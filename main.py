@@ -9,10 +9,8 @@ api = twitter.Api(consumer_key='uWTo0x3JMpSwsW0JzeOdbGBQV',
                   access_token_secret='PPkuQ55uUMYXiVP90Woyc152gqFvCaFzvRVAhl0fRTTpb')
 
 
-def get_n_followers(uid, how_many=50):
+def follow(uid):
     global so_far
-    if not uid:
-        return
     following = list()
     for fid in api.GetFriendIDs(uid):
         try:
@@ -24,9 +22,18 @@ def get_n_followers(uid, how_many=50):
             following.append(uid)
         except twitter.error.TwitterError:
             pass
-    for fid in following:
-        print(f"looking up {uid}'s followers")
-        get_n_followers(fid)
+    return following
+
+
+def get_n_followers(start):
+    visited, queue = set(), [start]
+    while queue:
+        vertex = queue.pop(0)
+        if vertex not in visited:
+            visited.add(vertex)
+            queue.extend(follow(vertex))
+    return visited
+
 
 if __name__ == '__main__':
     for fid in api.GetFriendIDs(api.VerifyCredentials().id):
