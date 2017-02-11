@@ -7,7 +7,7 @@ api = twitter.Api(consumer_key='uWTo0x3JMpSwsW0JzeOdbGBQV',
                   access_token_secret='PPkuQ55uUMYXiVP90Woyc152gqFvCaFzvRVAhl0fRTTpb')
 
 
-def get_n_followers(uid, how_many=5):
+def get_n_followers(uid, how_many=50):
     global so_far
     if not uid:
         return
