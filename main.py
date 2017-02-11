@@ -1,0 +1,26 @@
+import twitter
+
+api = twitter.Api(consumer_key='uWTo0x3JMpSwsW0JzeOdbGBQV',
+                  consumer_secret='pmaaBV5RiKwJHAub6t7TjREWLXJDgCJg88bcpgeIYJ0rrX3DkY',
+                  access_token_key='776129399783428096-P6q5kQA0EZWSicMz2hYRIWAdjuD9ETX',
+                  access_token_secret='PPkuQ55uUMYXiVP90Woyc152gqFvCaFzvRVAhl0fRTTpb')
+
+
+def get_n_followers(uid, how_many=50):
+    if not uid:
+        return
+    following = list()
+    for fid in api.GetFriendIDs(uid):
+        uid = api.CreateFriendship(fid).id
+        so_far += 1
+        if so_far >= how_many:
+            exit(0)
+        print(f"now following {uid}")
+        following.append(uid)
+    for fid in following:
+        print(f"looking up {uid}'s followers")
+        get_n_followers(fid)
+
+if __name__ == '__main__':
+    so_far = 0
+    get_n_followers(api.VerifyCredentials().id)
