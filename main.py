@@ -1,5 +1,6 @@
 import twitter
 
+so_far = int()
 api = twitter.Api(consumer_key='uWTo0x3JMpSwsW0JzeOdbGBQV',
                   consumer_secret='pmaaBV5RiKwJHAub6t7TjREWLXJDgCJg88bcpgeIYJ0rrX3DkY',
                   access_token_key='776129399783428096-P6q5kQA0EZWSicMz2hYRIWAdjuD9ETX',
@@ -7,6 +8,7 @@ api = twitter.Api(consumer_key='uWTo0x3JMpSwsW0JzeOdbGBQV',
 
 
 def get_n_followers(uid, how_many=50):
+    global so_far
     if not uid:
         return
     following = list()
@@ -22,5 +24,4 @@ def get_n_followers(uid, how_many=50):
         get_n_followers(fid)
 
 if __name__ == '__main__':
-    so_far = 0
     get_n_followers(api.VerifyCredentials().id)
