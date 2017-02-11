@@ -9,7 +9,7 @@ api = twitter.Api(consumer_key='uWTo0x3JMpSwsW0JzeOdbGBQV',
                   access_token_secret='PPkuQ55uUMYXiVP90Woyc152gqFvCaFzvRVAhl0fRTTpb')
 
 
-def follow(uid):
+def follow(uid, how_many=50):
     global so_far
     following = list()
     for fid in api.GetFriendIDs(uid):
