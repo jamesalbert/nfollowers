@@ -24,4 +24,5 @@ def get_n_followers(uid, how_many=50):
         get_n_followers(fid)
 
 if __name__ == '__main__':
-    get_n_followers(api.VerifyCredentials().id)
+    for fid in api.GetFriendIDs(uid):
+        get_n_followers(uid)
