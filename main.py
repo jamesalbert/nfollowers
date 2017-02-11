@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import twitter
 
 so_far = int()
@@ -13,12 +15,15 @@ def get_n_followers(uid, how_many=50):
         return
     following = list()
     for fid in api.GetFriendIDs(uid):
-        uid = api.CreateFriendship(fid).id
-        so_far += 1
-        if so_far >= how_many:
-            exit(0)
-        print(f"now following {uid}")
-        following.append(uid)
+        try:
+            uid = api.CreateFriendship(fid).id
+            so_far += 1
+            if so_far >= how_many:
+                exit(0)
+            print(f"now following {uid}")
+            following.append(uid)
+        except twitter.error.TwitterError:
+            pass
     for fid in following:
         print(f"looking up {uid}'s followers")
         get_n_followers(fid)
